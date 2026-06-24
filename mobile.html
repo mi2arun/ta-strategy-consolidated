@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TA Strategy — Mobile / Print · Consolidated Pvt Ltd</title>
+<style>
+  :root{
+    --navy:#0a1628;--ink:#16233b;--gold:#9a7321;--gold-d:#7d5d18;--gold-bg:#f4ecda;
+    --muted:#5b6675;--good:#1f8a59;--good-bg:#e8f6ee;
+    --bad:#c0432f;--bad-bg:#fbeae6;--warn:#9a6a12;--line:#e4e0d6;--paper:#fbfaf7;--card:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--paper);color:#1b2334;line-height:1.55;-webkit-font-smoothing:antialiased;font-size:15px}
+  .doc{max-width:720px;margin:0 auto;padding:0 16px 60px}
+
+  /* Cover */
+  .cover{background:radial-gradient(120% 100% at 80% -10%,#16294a,#0a1628 60%,#060d18);color:#eef1f7;
+    border-radius:0 0 22px 22px;padding:30px 22px 30px;margin:0 -16px 22px;text-align:left}
+  .logo{font-family:Georgia,serif;font-style:italic;font-weight:700;background:linear-gradient(180deg,#f0dca5,#b5894a);
+    color:#22150a;padding:4px 13px;border-radius:6px;font-size:14px;display:inline-block;box-shadow:0 2px 0 rgba(0,0,0,.3)}
+  .cover .ey{color:#c9a35e;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-size:11px;margin:16px 0 8px}
+  .cover h1{font-size:27px;line-height:1.12;font-weight:800;letter-spacing:-.02em}
+  .cover h1 .g{background:linear-gradient(120deg,#fff 30%,#e3c98b);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .cover p{color:#cdd5e6;font-size:14px;margin-top:12px}
+  .pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+  .pill{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);padding:6px 12px;border-radius:99px;font-size:12px;color:#e6ebf5;font-weight:600}
+  .pill b{color:#e3c98b}
+
+  /* Section card */
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:16px;
+    box-shadow:0 1px 2px rgba(20,30,50,.04)}
+  .kick{color:var(--gold);font-weight:800;letter-spacing:1.2px;text-transform:uppercase;font-size:11px;margin-bottom:7px}
+  h2{font-size:20px;line-height:1.18;font-weight:800;letter-spacing:-.01em;color:var(--navy);margin-bottom:6px}
+  .sub{color:#586172;font-size:14px;margin:6px 0 14px}
+  h3{font-size:15px;font-weight:700;color:var(--ink);margin:14px 0 4px}
+  p{margin:8px 0}
+  blockquote{border-left:3px solid var(--gold);padding:6px 0 6px 16px;margin:10px 0;font-weight:600;color:#2a3346;font-size:15px}
+
+  /* metric strip */
+  .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin:14px 0}
+  .m{background:var(--gold-bg);border:1px solid #ece1c8;border-radius:11px;padding:12px 13px}
+  .m .n{font-size:23px;font-weight:800;letter-spacing:-.02em;line-height:1;color:var(--navy)}
+  .m .n.bad{color:var(--bad)} .m .n.good{color:var(--good)}
+  .m .l{font-size:11.5px;color:#6b7280;margin-top:6px;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+
+  /* problem/benchmark cards */
+  .cards{display:grid;gap:10px;margin:12px 0}
+  .c{background:#faf8f3;border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .c .t{font-weight:800;font-size:14px;color:var(--navy);display:flex;align-items:center;gap:8px}
+  .c .t .tg{margin-left:auto;font-size:10px;font-weight:800;color:var(--gold);letter-spacing:.5px}
+  .c p{font-size:13px;color:#5b6675;margin:5px 0 0}
+  .c.peer{border-color:#e0c489;background:#fbf5e7}
+
+  /* lists */
+  ul{margin:8px 0 4px;padding-left:0;list-style:none}
+  li{font-size:13.5px;line-height:1.5;color:#3a4252;padding-left:22px;position:relative;margin:7px 0}
+  li::before{content:"→";position:absolute;left:0;color:var(--gold);font-weight:700}
+  .sol{background:var(--good-bg);border:1px solid #cdead9;border-radius:12px;padding:14px 16px;margin-top:12px}
+  .sol h4{color:var(--good);font-size:11.5px;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+  .sol li::before{content:"✓";color:var(--good)}
+  .sol li b{color:var(--gold-d)}
+  .risk{background:var(--bad-bg);border:1px solid #f1cfc7;border-radius:12px;padding:14px 16px;margin-top:12px}
+  .risk h4{color:var(--bad);font-size:11.5px;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+  .risk li::before{content:"⚠";color:var(--bad)}
+
+  .note{background:var(--gold-bg);border:1px solid #ece1c8;border-left:4px solid var(--gold);border-radius:10px;padding:12px 15px;margin-top:12px;font-size:13.5px}
+  .note b{color:var(--gold-d)}
+
+  /* timeline / tabs reflow */
+  .q{border:1px solid var(--line);border-radius:11px;padding:12px 14px;margin:9px 0;background:#faf8f3}
+  .q .h{font-weight:800;font-size:14px;color:var(--navy);margin-bottom:5px}
+  .q .h .n{background:var(--navy);color:#fff;border-radius:6px;padding:2px 8px;font-size:12px;margin-right:8px}
+
+  /* KPI table */
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+  th{background:#f3f0e8;color:var(--navy);font-size:10.5px;text-transform:uppercase;letter-spacing:.5px}
+  .cur{color:var(--bad);font-weight:700} .tgt{color:var(--good);font-weight:700} .ar{color:#9aa1b0}
+
+  footer{text-align:center;color:#8a90a0;font-size:11.5px;margin-top:20px;padding:0 10px}
+
+  /* PRINT / PDF */
+  @page{size:A4 portrait;margin:12mm 10mm}
+  @media print{
+    body{background:#fff;font-size:11.5pt}
+    .doc{max-width:none;padding:0}
+    .cover{margin:0 0 14px;border-radius:14px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    section{break-inside:avoid;page-break-inside:avoid;box-shadow:none;margin-bottom:11px}
+    .m,.c,.sol,.risk,.note,.q,th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .metrics{grid-template-columns:repeat(4,1fr)}
+  }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <div class="cover">
+    <span class="logo">Consolidated</span>
+    <div class="ey">Head – Talent Acquisition · Strategic Transformation</div>
+    <h1>Building a <span class="g">Talent Engine</span> for the ₹5,000 Cr Journey</h1>
+    <p>A strategic, execution-oriented plan to scale hiring to ~1,000 roles/year, cut frontline attrition, and make Talent Acquisition a true business lever — with verified global &amp; India benchmarks.</p>
+    <div class="pills">
+      <span class="pill">Revenue <b>₹3,000 → ₹5,000 Cr</b></span>
+      <span class="pill"><b>~1,000</b> hires/yr</span>
+      <span class="pill">Attrition <b>45% → &lt;25%</b></span>
+      <span class="pill">TAT <b>50+ → ≤30 d</b></span>
+    </div>
+  </div>
+
+  <!-- 1 CURRENT PROBLEM -->
+  <section>
+    <div class="kick">01 · The Current Problem</div>
+    <h2>One hiring engine, three breaking points</h2>
+    <p class="sub">Built to grow +50–66% to ₹5,000 Cr — but the hiring engine is built for a smaller, slower company. ~1,000 hires needed this year; ~820 are high-volume frontline.</p>
+    <div class="metrics">
+      <div class="m"><div class="n bad">45%</div><div class="l">Overall attrition</div></div>
+      <div class="m"><div class="n bad">55%+</div><div class="l">Frontline attrition</div></div>
+      <div class="m"><div class="n bad">50+</div><div class="l">Day avg TAT</div></div>
+      <div class="m"><div class="n bad">₹9,000</div><div class="l">Cost per hire</div></div>
+    </div>
+    <div class="cards">
+      <div class="c"><div class="t">🪣 The leaky bucket <span class="tg">LEAK</span></div><p>45% attrition · 55%+ frontline · 11-mo tenure. ~55% of hiring just replaces churn instead of fuelling growth.</p></div>
+      <div class="c"><div class="t">🐢 Reactive &amp; slow <span class="tg">SLOW</span></div><p>50+ day TAT, weak forecasting, reactive pipelines. Stores open understaffed; panic hiring lowers quality.</p></div>
+      <div class="c"><div class="t">💸 Expensive &amp; manual <span class="tg">COST</span></div><p>₹9,000/hire · 9–10% agency spend · partial ATS · no AI/analytics · only 20% referral hiring.</p></div>
+    </div>
+    <p>The engine was built for <b>steady-state replacement</b> at ₹3,000 Cr. The three problems feed a <b>vicious cycle</b>: high attrition forces volume → volume overwhelms a slow process → slowness forces premium agency hiring → rushed, mismatched hires churn again. Breaking the attrition link collapses the whole cycle.</p>
+    <div class="sol"><h4>🎯 How we solve it</h4><ul>
+      <li><b>Attack attrition first</b> — every retained employee is one fewer replacement hire, shrinking both the ~1,000 number and its cost.</li>
+      <li><b>Convert ~820 frontline roles to always-on talent pools</b> so demand spikes are absorbed from a warm bench, not panic-hired.</li>
+      <li><b>Instrument the funnel end-to-end</b> (ATS + analytics) — manage by data, not gut feel.</li>
+      <li><b>Re-channel agency spend into referrals &amp; in-house sourcing</b> — cut cost and raise quality at once.</li>
+    </ul></div>
+  </section>
+
+  <!-- 2 BENCHMARKS -->
+  <section>
+    <div class="kick">02 · Benchmarks · Global &amp; India</div>
+    <h2>Every target we're setting has already been hit</h2>
+    <p class="sub">Retail churns at ~2× the economy, so &lt;25% is best-in-class. Leaders prove the speed; an Indian Apple Premium Partner peer proves the model.</p>
+    <div class="cards">
+      <div class="c"><div class="t">🌯 Chipotle <span class="tg">AI</span></div><p>TAT <b>12 → 4 days</b> at ~10k hires/yr via conversational AI. Our hero proof-point.</p></div>
+      <div class="c"><div class="t">🏪 7-Eleven <span class="tg">TAT</span></div><p>TAT <b>~10 → &lt;5 days</b> via AI apply/screen/schedule 24/7.</p></div>
+      <div class="c"><div class="t">☕ Starbucks <span class="tg">RETAIN</span></div><p>Turnover cut <b>65% → 49%</b> via wages, benefits &amp; career paths.</p></div>
+      <div class="c peer"><div class="t">🦄 Unicorn Infosolutions <span class="tg">INDIA PEER</span></div><p><b>₹3,700 Cr+</b> turnover · ~100 stores + 39 service centres · 49 cities · 1,500+ staff. Almost exactly our profile.</p></div>
+      <div class="c"><div class="t">📱 India hiring stack <span class="tg">TOOLS</span></div><p><b>Vahan.ai</b> WhatsApp AI recruiter (2–3 day fill) · <b>Apna</b> 22M-user network · <b>RASCI/NAPS</b> apprenticeships · <b>Lenskart Academy</b> training.</p></div>
+    </div>
+    <div class="note">📊 Retail turnover <b>~27% vs 13%</b> economy-wide (Mercer 2025). Even <b>Reliance Retail cut ~38,000 net jobs in FY24</b> while hiring hard — churn is structural; the winner stops the leak fastest. <i>Sources: Mercer, Starbucks ESG, Paradox, RIL FY24, FranchiseIndia, RASCI — all verified.</i></div>
+  </section>
+
+  <!-- 3 VISION -->
+  <section>
+    <div class="kick">03 · Vision</div>
+    <h2>From reactive hiring desk to talent engine</h2>
+    <blockquote>"The right people, faster, cheaper, and with staying power — a proactive, data-driven, brand-led talent engine."</blockquote>
+    <p>The shift is from a function that <b>fills requisitions after they open</b> to one that <b>forecasts demand from the store-expansion plan and builds talent ahead of need</b> — a workforce-planning partner to Retail Ops, measured on quality and tenure, not just speed.</p>
+    <div class="sol"><h4>🎯 What each pillar means</h4><ul>
+      <li><b>Speed</b> → pipelines + AI + SLAs (TA Ops). Metric: predictable ≤30-day TAT.</li>
+      <li><b>Quality &amp; Stickiness</b> → culture-fit scorecards + realistic job previews. Metric: 90-day stick rate.</li>
+      <li><b>Efficiency</b> → 40%+ referrals, &lt;4% agency, AI automation. Metric: cost-per-hire ₹4,500.</li>
+      <li><b>Employer Brand</b> → always-on content + Apple-ecosystem prestige. Metric: inbound applications &amp; offer-accept rate.</li>
+    </ul></div>
+  </section>
+
+  <!-- 4 30-60-90 -->
+  <section>
+    <div class="kick">04 · The First 90 Days</div>
+    <h2>30 · 60 · 90 day plan</h2>
+    <p>Deliberately sequenced — <b>you cannot scale a broken process</b>. Stabilise &amp; instrument first, build the engine second, prove results third. Early visible wins buy credibility for the deeper fixes.</p>
+    <div class="q"><div class="h"><span class="n">0–30</span>Diagnose &amp; Stabilize</div>
+      <ul><li>Audit open reqs, TAT by stage, source-of-hire &amp; attrition by store/tenure.</li><li>Mandate full ATS adoption — one source of truth.</li><li>Target top 10 bleeding stores &amp; 20 critical roles.</li><li>War-room for the 100 new-store buffer roles.</li><li>Relaunch referrals with instant payouts.</li></ul></div>
+    <div class="q"><div class="h"><span class="n">31–60</span>Build the Engine</div>
+      <ul><li>Structured interview kits + culture-fit scorecards.</li><li>Always-on talent pools for high-volume roles.</li><li>Onboarding redesign: Day-1 readiness + 30/60/90 check-ins.</li><li>Deploy AI screening + chatbot.</li><li>Cut consultant contracts; shift spend to referrals.</li></ul></div>
+    <div class="q"><div class="h"><span class="n">61–90</span>Scale &amp; Prove</div>
+      <ul><li>Early wins: TAT ~40 days on volume roles; offer-drop &lt;20%.</li><li>Launch employer-brand content.</li><li>Go live with real-time KPI dashboard.</li><li>Present committed 12-month roadmap to leadership.</li></ul></div>
+  </section>
+
+  <!-- 5 ROADMAP -->
+  <section>
+    <div class="kick">05 · 12-Month Roadmap</div>
+    <h2>Four quarters to a scalable engine</h2>
+    <p class="sub">Dependency-ordered, not parallel. Each quarter has a <b>gate</b> — we don't chase the next theme until the prior quarter's enablers are live.</p>
+    <div class="q"><div class="h"><span class="n">Q1</span>Foundation</div><ul><li>Full ATS · structured hiring · referral engine · onboarding v2. <b>Gate: ATS adoption &gt;90%.</b></li></ul></div>
+    <div class="q"><div class="h"><span class="n">Q2</span>Speed</div><ul><li>AI screening at scale · pools for top 5 roles. <b>Gate: TAT ≤35 days.</b></li></ul></div>
+    <div class="q"><div class="h"><span class="n">Q3</span>Quality &amp; Brand</div><ul><li>Employer-brand campaigns · leadership playbook. <b>Gate: attrition &lt;35%.</b></li></ul></div>
+    <div class="q"><div class="h"><span class="n">Q4</span>Optimize</div><ul><li>Squeeze cost &amp; agency. <b>Gate: TAT ≤30, cost ₹4,500, agency &lt;4%, referral 40%+.</b></li></ul></div>
+  </section>
+
+  <!-- 6 ORG -->
+  <section>
+    <div class="kick">06 · Organization</div>
+    <h2>A team built for 1,000+ hires a year</h2>
+    <p class="sub">Centre-of-Excellence + embedded recruiters, structured by hiring <i>type</i> — ~13–15 people total.</p>
+    <div class="cards">
+      <div class="c"><div class="t">Volume / Retail <span class="tg">~820/yr</span></div><p>Frontline &amp; service hiring.</p></div>
+      <div class="c"><div class="t">Corporate &amp; Enterprise <span class="tg">~160/yr</span></div><p>B2B · Edu · Corporate.</p></div>
+      <div class="c"><div class="t">Leadership &amp; Niche <span class="tg">IN-HOUSE</span></div><p>Exec search in-sourced.</p></div>
+      <div class="c"><div class="t">TA Ops &amp; Analytics <span class="tg">BACKBONE</span></div><p>ATS · AI · dashboards.</p></div>
+      <div class="c"><div class="t">Employer Brand <span class="tg">PIPELINE</span></div><p>Always-on sourcing.</p></div>
+    </div>
+    <p>A <b>CoE + embedded model</b> gives consistency and closeness: central teams own tooling &amp; standards; embedded recruiters sit with the business and move fast. Structuring by hiring type matters — a volume recruiter and an exec-search lead are not interchangeable.</p>
+    <div class="sol"><h4>🎯 How we build it</h4><ul>
+      <li><b>Right-size to demand:</b> ~6–7 recruiters, 3–4 sourcers, 1 ops/analytics, 1 brand + 4 leads.</li>
+      <li><b>Real ratios:</b> volume recruiter ≈ 120–150 hires/yr · corporate ≈ 40–60.</li>
+      <li><b>Shift capability</b> to sourcing, data fluency &amp; stakeholder management.</li>
+      <li><b>In-source leadership search</b> — cut agency spend, make senior hiring predictable.</li>
+    </ul></div>
+  </section>
+
+  <!-- 7 TAT -->
+  <section>
+    <div class="kick">07 · Faster Hiring</div>
+    <h2>Cutting TAT from 50+ to ≤30 days</h2>
+    <p>First diagnose where the 50 days goes: the funnel stalls when <b>sourcing starts from zero</b> on every role and while <b>waiting on hiring-manager feedback</b>. The fix is structural — pre-build candidates and run the funnel in parallel under hard SLAs.</p>
+    <div class="sol"><h4>🎯 The concrete TAT plan</h4><ul>
+      <li><b>Pipeline, not posting:</b> pre-screened pools for ~820 volume roles → days, not weeks.</li>
+      <li><b>Parallel funnel:</b> screen, assess &amp; schedule concurrently; AI screens 24/7.</li>
+      <li><b>SLA-locked stages:</b> HM feedback in 48h · interview-to-offer in 5 days, with escalation.</li>
+      <li><b>Instant scheduling</b> via chatbot for frontline; standing exec-search bench for leadership.</li>
+      <li><b>Cut offer-drop 28%→&lt;12%</b> with faster cycles, transparent comp &amp; warm engagement to Day 1.</li>
+    </ul></div>
+  </section>
+
+  <!-- 8 ATTRITION -->
+  <section>
+    <div class="kick">08 · Attrition Framework</div>
+    <h2>45% → below 25% in 18–24 months</h2>
+    <p>Attrition is <b>front-loaded</b> — ~20% of new hires leave within 45 days, ~70% of leavers within 90 days. The framework attacks all three stages where tenure is won or lost. Retention begins at the point of hire.</p>
+    <div class="metrics" style="grid-template-columns:repeat(3,1fr)">
+      <div class="m"><div class="n bad">45%</div><div class="l">Today</div></div>
+      <div class="m"><div class="n" style="color:var(--warn)">~35%</div><div class="l">12 months</div></div>
+      <div class="m"><div class="n good">&lt;25%</div><div class="l">24 months</div></div>
+    </div>
+    <div class="sol"><h4>🎯 The three-stage framework</h4><ul>
+      <li><b>A · Hire right:</b> culture-fit &amp; realistic-job-preview screening + 40%+ referrals → fewer mismatched early-quitters.</li>
+      <li><b>B · Onboard right:</b> Day-1 readiness, buddy system, 30/60/90 check-ins, a named owner for the 90-day stick rate.</li>
+      <li><b>C · Retain right:</b> Advisor→Senior→Team Lead→Store Manager ladder + early-warning attrition analytics.</li>
+    </ul></div>
+  </section>
+
+  <!-- 9 TECH & COST -->
+  <section>
+    <div class="kick">09 · Technology, AI &amp; Cost</div>
+    <h2>AI drives the speed — and halves the cost</h2>
+    <p>AI absorbs the repetitive, high-volume work (sourcing, screening, scheduling, FAQs) that today eats recruiter time and agency fees, so the same team handles more hires at lower cost. Cost falls mainly as a by-product of more referrals, fewer agencies, and less rework from lower attrition.</p>
+    <h3>🤖 Phased tech rollout</h3>
+    <ul><li><b>Phase 1:</b> full ATS + live dashboards (data spine).</li><li><b>Phase 2:</b> AI screening + conversational chatbot on volume funnels.</li><li><b>Phase 3:</b> AI sourcing + predictive attrition analytics.</li></ul>
+    <div class="sol"><h4>💰 Cost levers: ₹9,000 → ₹4,500</h4><ul>
+      <li><b>Referrals 20%→40%+</b> via instant-payout scheme — cheapest, stickiest channel.</li>
+      <li><b>Agency 9–10%→&lt;4%</b> by in-sourcing sourcing &amp; leadership search.</li>
+      <li><b>Lower attrition</b> — the largest hidden saving: every avoided replacement saves a full hire + ramp-up.</li>
+    </ul></div>
+    <div class="note">🔁 <b>The flywheel:</b> referrals stay longer → attrition falls → fewer re-hires → recruiters focus on growth, not churn → agency budget reallocated to cheaper, stickier channels.</div>
+  </section>
+
+  <!-- 10 KPI & RISK -->
+  <section>
+    <div class="kick">10 · Metrics, Governance &amp; Risk</div>
+    <h2>How we track it — and de-risk it</h2>
+    <table>
+      <thead><tr><th>KPI</th><th>Now</th><th></th><th>Target</th></tr></thead>
+      <tbody>
+        <tr><td>Average TAT</td><td><span class="cur">50+ d</span></td><td class="ar">→</td><td><span class="tgt">≤30 d</span></td></tr>
+        <tr><td>Cost per hire</td><td><span class="cur">₹9,000</span></td><td class="ar">→</td><td><span class="tgt">₹4,500</span></td></tr>
+        <tr><td>Referral hiring</td><td><span class="cur">20%</span></td><td class="ar">→</td><td><span class="tgt">40%+</span></td></tr>
+        <tr><td>Consultant spend</td><td><span class="cur">9–10%</span></td><td class="ar">→</td><td><span class="tgt">&lt;4%</span></td></tr>
+        <tr><td>Offer drop</td><td><span class="cur">28%</span></td><td class="ar">→</td><td><span class="tgt">&lt;12%</span></td></tr>
+        <tr><td>Attrition</td><td><span class="cur">45%</span></td><td class="ar">→</td><td><span class="tgt">&lt;25%</span></td></tr>
+        <tr><td>90-day stick rate</td><td><span class="cur">base</span></td><td class="ar">→</td><td><span class="tgt">90%+</span></td></tr>
+      </tbody>
+    </table>
+    <p class="sub">Most important leading indicator: the <b>90-day stick rate</b> — it predicts attrition months before the annual number moves.</p>
+    <div class="risk"><h4>⚠ Risk → Mitigation</h4><ul>
+      <li><b>Competitors hiring hard</b> → employer brand + faster offers + referral pull.</li>
+      <li><b>Speed vs quality</b> → pipelines + structured assessment.</li>
+      <li><b>Attrition slow to fall</b> → front-load onboarding &amp; first-90-day fixes.</li>
+      <li><b>Tech adoption lag</b> → mandate ATS; tie to manager scorecards.</li>
+      <li><b>Demand spikes</b> → 100-hire buffer + always-on pools.</li>
+    </ul></div>
+    <div class="note">📊 <b>Weekly:</b> open reqs vs target · TAT by stage · offers made/accepted/dropped · pipeline coverage · new-store readiness. <b>Monthly:</b> the strategic KPIs above.</div>
+  </section>
+
+  <!-- 11 OUTCOMES -->
+  <section style="background:linear-gradient(180deg,#0f1d36,#0a1628);border-color:rgba(255,255,255,.08);color:#eef1f7;-webkit-print-color-adjust:exact;print-color-adjust:exact">
+    <div class="kick" style="color:#c9a35e">11 · Outcomes &amp; The Ask</div>
+    <h2 style="color:#fff">Where we land in 18–24 months</h2>
+    <blockquote style="border-color:#c9a35e;color:#e7ecf6">We can't hire our way to ₹5,000 Cr while 45% walks out the back door. Fix retention and speed together, and the same ~1,000 hires power real growth — faster, cheaper, built to last.</blockquote>
+    <div class="metrics">
+      <div class="m" style="background:rgba(70,201,139,.12);border-color:rgba(70,201,139,.3)"><div class="n good">≤30 d</div><div class="l" style="color:#9fb0c4">Average TAT</div></div>
+      <div class="m" style="background:rgba(70,201,139,.12);border-color:rgba(70,201,139,.3)"><div class="n good">&lt;25%</div><div class="l" style="color:#9fb0c4">Attrition</div></div>
+      <div class="m" style="background:rgba(70,201,139,.12);border-color:rgba(70,201,139,.3)"><div class="n good">₹4,500</div><div class="l" style="color:#9fb0c4">Cost per hire</div></div>
+      <div class="m" style="background:rgba(201,163,94,.14);border-color:rgba(201,163,94,.35)"><div class="n" style="color:#e3c98b">₹5,000 Cr</div><div class="l" style="color:#9fb0c4">Revenue enabled</div></div>
+    </div>
+    <p style="color:#aeb7c8;font-size:13px">Head – Talent Acquisition, Consolidated Pvt Ltd · TA as a strategic business lever · 12–24 month horizon.</p>
+  </section>
+
+  <footer>Apple Partner Retail &amp; Omnichannel Growth · South &amp; West India · Verified global &amp; India benchmarks (Mercer, Starbucks ESG, Paradox, RIL FY24, FranchiseIndia, RASCI, Google Cloud).</footer>
+
+</div>
+</body>
+</html>
