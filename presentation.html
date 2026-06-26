@@ -7,29 +7,27 @@
 <style>
   :root{
     --ink:#0f1722; --ink-2:#3a4452; --muted:#6c7686; --faint:#9aa3b1;
-    --line:#e5e9ef; --line-2:#eef1f5; --bg:#ffffff; --bg-2:#f6f8fa; --bg-3:#eef2f6;
-    --teal:#0d9488; --teal-d:#0b7d72; --teal-bg:#e7f5f3; --teal-line:#bfe5e0;
+    --line:#e0e6ec; --line-2:#e9eef3; --bg:#ffffff; --bg-2:#f3f7f8; --canvas:#eef4f5;
+    --teal:#0d9488; --teal-d:#0b7d72; --teal-bg:#e3f3f1; --teal-line:#bfe5e0;
     --ink-deep:#0c1a2b; --amber:#c2700a; --amber-bg:#fbf2e3; --red:#d6453a; --red-bg:#fdecea;
-    --green:#0a8f5f; --green-bg:#e8f6ef; --indigo:#3f4fb0;
+    --green:#0a8f5f; --green-bg:#e8f6ef;
     --shadow:0 1px 2px rgba(16,24,40,.05),0 8px 28px rgba(16,24,40,.06);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
-    background:var(--bg-3);color:var(--ink);overflow:hidden;-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 1}
+    background:#dfe7ea;color:var(--ink);overflow:hidden;-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 1}
 
   .deck{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
-  .slide{position:absolute;inset:0;background:var(--bg);display:flex;flex-direction:column;
+  .slide{position:absolute;inset:0;background:var(--canvas);display:flex;flex-direction:column;
     padding:64px 76px 60px;opacity:0;transform:translateY(14px);pointer-events:none;
     transition:opacity .45s ease,transform .45s ease;overflow:auto}
   .slide.active{opacity:1;transform:none;pointer-events:auto}
   .slide::-webkit-scrollbar{width:8px}
-  .slide::-webkit-scrollbar-thumb{background:#d3d9e1;border-radius:8px}
+  .slide::-webkit-scrollbar-thumb{background:#cfd6de;border-radius:8px}
 
-  /* progress */
   .progress{position:fixed;top:0;left:0;height:3px;background:var(--teal);z-index:50;transition:width .4s ease}
 
-  /* header band */
   .shead{display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-shrink:0}
   .sec-name{color:var(--teal);font-size:12.5px;font-weight:700;letter-spacing:2.4px;text-transform:uppercase}
   .sec-num{color:var(--faint);font-size:13px;font-weight:600;letter-spacing:1px}
@@ -37,55 +35,47 @@
   .rule{height:2px;background:var(--line);margin:12px 0 0;flex-shrink:0;position:relative}
   .rule::before{content:"";position:absolute;left:0;top:0;height:2px;width:64px;background:var(--teal)}
 
-  h1{font-size:clamp(32px,4.6vw,58px);line-height:1.03;font-weight:800;letter-spacing:-.025em;color:var(--ink)}
+  h1{font-size:clamp(32px,4.6vw,56px);line-height:1.04;font-weight:800;letter-spacing:-.025em;color:var(--ink)}
   h2.title{font-size:clamp(24px,3vw,38px);line-height:1.08;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin-top:20px}
-  .lead{color:var(--ink-2);font-size:clamp(15px,1.45vw,18px);line-height:1.5;max-width:74ch;margin-top:12px}
+  .lead{color:var(--ink-2);font-size:clamp(15px,1.45vw,18px);line-height:1.5;max-width:78ch;margin-top:12px}
   .body{margin-top:26px;flex:1;min-height:0}
 
-  /* eyebrow numbering for cover sections list */
-  .mini{color:var(--muted);font-size:13px}
-
   /* COVER */
-  .cover{padding:0;flex-direction:row;overflow:hidden}
-  .cover .left{flex:1.35;padding:72px 64px;display:flex;flex-direction:column;justify-content:center}
-  .cover .right{flex:1;background:linear-gradient(160deg,var(--ink-deep),#102a44);color:#eaf1f6;padding:64px 52px;display:flex;flex-direction:column;justify-content:center;gap:0}
+  .cover{padding:0;flex-direction:row;overflow:hidden;background:var(--bg)}
+  .cover .left{flex:1.35;padding:72px 64px;display:flex;flex-direction:column;justify-content:center;background:var(--bg)}
+  .cover .right{flex:1;background:linear-gradient(160deg,var(--ink-deep),#102a44);color:#eaf1f6;padding:64px 52px;display:flex;flex-direction:column;justify-content:center}
   .brandline{display:flex;align-items:center;gap:14px;margin-bottom:30px}
   .logo{font-family:Georgia,serif;font-style:italic;font-weight:700;background:#10212f;color:#fff;padding:5px 14px;border-radius:6px;font-size:15px;letter-spacing:.3px}
   .brandline .div{height:18px;width:1px;background:var(--line)}
   .brandline span{color:var(--muted);font-size:11.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
-  .cover h1{max-width:16ch}
+  .cover h1{max-width:17ch}
   .cover h1 .u{box-shadow:inset 0 -12px 0 var(--teal-bg)}
-  .cover .sub{color:var(--ink-2);font-size:18px;line-height:1.5;margin-top:24px;max-width:46ch}
+  .cover .sub{color:var(--ink-2);font-size:18px;line-height:1.5;margin-top:24px;max-width:48ch}
   .cover .who{margin-top:40px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:18px}
   .cover .who b{color:var(--ink)}
-  .right .rk{color:var(--teal);font-size:11.5px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;margin-bottom:22px;opacity:.95}
+  .right .rk{color:#37c8b8;font-size:11.5px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;margin-bottom:22px}
   .kfig{padding:16px 0;border-top:1px solid rgba(255,255,255,.12)}
   .kfig:last-child{border-bottom:1px solid rgba(255,255,255,.12)}
-  .kfig .v{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1}
-  .kfig .v .ar{color:var(--teal);font-weight:700}
+  .kfig .v{font-size:29px;font-weight:800;letter-spacing:-.02em;line-height:1}
+  .kfig .v .ar{color:#37c8b8;font-weight:700}
   .kfig .k{color:#9fb2c2;font-size:12px;margin-top:6px;text-transform:uppercase;letter-spacing:.8px}
 
-  /* TILES (stat) */
   .tiles{display:grid;gap:14px}
-  .t4{grid-template-columns:repeat(4,1fr)} .t5{grid-template-columns:repeat(5,1fr)} .t3{grid-template-columns:repeat(3,1fr)} .t2{grid-template-columns:repeat(2,1fr)}
-  .tile{border:1px solid var(--line);border-radius:12px;padding:18px 18px;background:var(--bg);position:relative;overflow:hidden}
+  .t4{grid-template-columns:repeat(4,1fr)} .t3{grid-template-columns:repeat(3,1fr)}
+  .tile{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--bg);position:relative;overflow:hidden}
   .tile::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--teal)}
-  .tile.red::before{background:var(--red)} .tile.amber::before{background:var(--amber)} .tile.green::before{background:var(--green)}
-  .tile .v{font-size:clamp(26px,3vw,36px);font-weight:800;letter-spacing:-.025em;line-height:1;color:var(--ink)}
+  .tile.red::before{background:var(--red)} .tile.green::before{background:var(--green)}
+  .tile .v{font-size:clamp(26px,3vw,34px);font-weight:800;letter-spacing:-.025em;line-height:1;color:var(--ink)}
   .tile.red .v{color:var(--red)} .tile.green .v{color:var(--green)}
   .tile .k{color:var(--muted);font-size:12.5px;margin-top:9px;font-weight:600;line-height:1.3}
-  .tile .x{color:var(--faint);font-size:11.5px;margin-top:7px}
 
-  /* generic cards */
   .cards{display:grid;gap:14px}
-  .card{border:1px solid var(--line);border-radius:12px;padding:18px 18px;background:var(--bg)}
+  .card{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--bg)}
   .card .h{font-weight:700;font-size:15px;color:var(--ink);display:flex;align-items:center;gap:9px}
   .card .h .tag{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:1px;color:var(--teal);background:var(--teal-bg);padding:3px 8px;border-radius:5px}
   .card p{color:var(--ink-2);font-size:13.5px;line-height:1.5;margin-top:8px}
   .card.peer{border-color:var(--teal-line);background:var(--teal-bg)}
-  .num-i{width:26px;height:26px;border-radius:7px;background:var(--ink-deep);color:#fff;font-size:13px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
 
-  /* bar chart */
   .bars{display:flex;flex-direction:column;gap:13px;margin-top:6px}
   .brow{display:flex;align-items:center;gap:16px}
   .brow .nm{width:150px;font-size:13.5px;color:var(--ink-2);font-weight:600;flex-shrink:0;text-align:right}
@@ -95,9 +85,7 @@
   .fill.red{background:linear-gradient(90deg,#c0392b,#e05a4d)}
   .fill.amber{background:linear-gradient(90deg,#b9710f,#d98a23)}
   .fill.green{background:linear-gradient(90deg,#0a7a52,#13a86e)}
-  .fill.ink{background:linear-gradient(90deg,#1d2c3d,#334865)}
 
-  /* two-col panels */
   .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .cols3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
   .panel{border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:var(--bg)}
@@ -117,9 +105,8 @@
   .insight b{color:var(--ink)}
   .src{color:var(--faint);font-size:12px;font-style:italic}
 
-  /* timeline */
   .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-  .ph{border:1px solid var(--line);border-radius:12px;padding:18px 16px;background:var(--bg);position:relative}
+  .ph{border:1px solid var(--line);border-radius:12px;padding:18px 16px;background:var(--bg)}
   .ph .tab{display:inline-block;background:var(--ink-deep);color:#fff;font-weight:800;font-size:12px;padding:4px 10px;border-radius:6px;letter-spacing:.5px}
   .ph .th{font-weight:700;font-size:15px;color:var(--ink);margin:12px 0 4px}
   .ph ul{list-style:none;display:grid;gap:7px;margin-top:8px}
@@ -127,8 +114,7 @@
   .ph li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--teal)}
   .ph .gate{margin-top:12px;font-size:11.5px;color:var(--teal-d);font-weight:700;background:var(--teal-bg);border-radius:6px;padding:6px 9px}
 
-  /* org */
-  .org{display:flex;flex-direction:column;align-items:center;gap:0;margin-top:8px}
+  .org{display:flex;flex-direction:column;align-items:center;margin-top:8px}
   .org .head{background:var(--ink-deep);color:#fff;font-weight:700;padding:12px 26px;border-radius:10px;font-size:15px}
   .org .stem{width:2px;height:22px;background:var(--line)}
   .org .row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;width:100%}
@@ -137,22 +123,16 @@
   .onode p{font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.35}
   .onode .c{display:inline-block;margin-top:8px;font-size:11px;font-weight:800;color:var(--teal-d);background:var(--teal-bg);border-radius:5px;padding:3px 8px}
 
-  /* process steps */
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-
-  /* KPI table */
   table{width:100%;border-collapse:collapse;font-size:14px}
   thead th{text-align:left;padding:11px 14px;background:var(--ink-deep);color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:700}
   thead th:first-child{border-radius:8px 0 0 0} thead th:last-child{border-radius:0 8px 0 0}
-  tbody td{padding:10px 14px;border-bottom:1px solid var(--line);color:var(--ink-2)}
-  tbody tr:nth-child(even){background:var(--bg-2)}
+  tbody td{padding:10px 14px;border-bottom:1px solid var(--line);color:var(--ink-2);background:var(--bg)}
+  tbody tr:nth-child(even) td{background:var(--bg-2)}
   .cur{color:var(--red);font-weight:700} .tgt{color:var(--green);font-weight:700} .ar{color:var(--faint);text-align:center}
 
-  /* footer */
   .foot{position:fixed;bottom:0;left:0;right:0;height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;font-size:11px;color:var(--faint);background:var(--bg);border-top:1px solid var(--line-2);z-index:20}
   .foot .b{font-weight:700;color:var(--muted);letter-spacing:.4px}
 
-  /* nav */
   .nav{position:fixed;bottom:46px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;z-index:60;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:6px 8px;box-shadow:var(--shadow)}
   .nav button{background:none;border:none;color:var(--ink-2);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;transition:.15s}
   .nav button:hover{background:var(--bg-2);color:var(--teal)}
@@ -165,7 +145,7 @@
   @media (max-width:920px){
     .slide{padding:46px 30px 54px}
     .cover{flex-direction:column} .cover .left,.cover .right{padding:40px 32px}
-    .t4,.t5,.timeline,.org .row,.cols3,.steps{grid-template-columns:1fr 1fr}
+    .t4,.timeline,.org .row,.cols3{grid-template-columns:1fr 1fr}
     .cols{grid-template-columns:1fr} .brow .nm{width:96px;font-size:12px}
   }
 </style>
@@ -179,285 +159,242 @@
   <section class="slide active cover">
     <div class="left">
       <div class="brandline"><span class="logo">Consolidated</span><span class="div"></span><span>Apple Partner Retail · Omnichannel Growth</span></div>
-      <h1>Building a <span class="u">Talent Engine</span> for the ₹5,000 Cr journey</h1>
-      <p class="sub">A data-driven Talent Acquisition strategy to scale hiring, stop frontline attrition, and convert TA into a strategic business lever.</p>
-      <div class="who">Prepared for <b>CEO · CHRO · Business Heads</b> &nbsp;·&nbsp; Head – Talent Acquisition &nbsp;·&nbsp; 12–24 month horizon · South &amp; West India</div>
+      <h1>Building a strong <span class="u">hiring system</span> for the ₹5,000 Cr journey</h1>
+      <p class="sub">A simple, practical plan to hire faster, stop people from leaving, and make hiring a key driver of business growth.</p>
+      <div class="who">Prepared for <b>CEO · CHRO · Business Heads</b> &nbsp;·&nbsp; Head – Talent Acquisition &nbsp;·&nbsp; 12–24 month plan · South &amp; West India</div>
     </div>
     <div class="right">
-      <div class="rk">The mandate at a glance</div>
+      <div class="rk">Our goals at a glance</div>
       <div class="kfig"><div class="v">₹3,000 <span class="ar">→</span> ₹5,000 Cr</div><div class="k">Revenue, next 12–24 months</div></div>
-      <div class="kfig"><div class="v">~1,000</div><div class="k">Hires required per year</div></div>
-      <div class="kfig"><div class="v">45% <span class="ar">→</span> &lt;25%</div><div class="k">Attrition target</div></div>
-      <div class="kfig"><div class="v">50+ <span class="ar">→</span> ≤30 days</div><div class="k">Time-to-hire target</div></div>
+      <div class="kfig"><div class="v">~1,000</div><div class="k">People to hire every year</div></div>
+      <div class="kfig"><div class="v">45% <span class="ar">→</span> below 25%</div><div class="k">Reduce people leaving</div></div>
+      <div class="kfig"><div class="v">50+ <span class="ar">→</span> 30 days</div><div class="k">Reduce hiring time</div></div>
     </div>
   </section>
 
-  <!-- 01 CURRENT PROBLEM -->
-  <section class="slide" data-anim>
-    <div class="shead"><div class="sec-name">Diagnosis</div><div class="sec-num"><b>01</b> / 12</div></div>
+  <!-- 01 VISION -->
+  <section class="slide">
+    <div class="shead"><div class="sec-name">Our Vision</div><div class="sec-num"><b>01</b> / 08</div></div>
     <div class="rule"></div>
-    <h2 class="title">One hiring engine, three breaking points</h2>
-    <p class="lead">The business is built to grow +50–66% to ₹5,000 Cr, but the hiring engine is built for a smaller, slower company. ~1,000 hires are needed this year — ~820 of them high-volume frontline.</p>
+    <h2 class="title">From a slow hiring desk to a smart hiring system</h2>
+    <p class="lead">Today we hire only after a job opens. We will change this — plan hiring early based on new-store plans and keep candidates ready in advance. We will focus on hiring good people who stay longer, not just filling seats fast.</p>
     <div class="body">
       <div class="tiles t4">
-        <div class="tile red"><div class="v" data-count="45" data-suf="%">0%</div><div class="k">Overall attrition</div><div class="x">target &lt;25%</div></div>
-        <div class="tile red"><div class="v" data-count="55" data-suf="%+">0%</div><div class="k">Frontline attrition</div><div class="x">11-month tenure</div></div>
-        <div class="tile red"><div class="v" data-count="50" data-suf="+">0</div><div class="k">Day average TAT</div><div class="x">target ≤30</div></div>
-        <div class="tile amber"><div class="v" data-count="9000" data-pre="₹">0</div><div class="k">Cost per hire</div><div class="x">target ₹4,500</div></div>
+        <div class="tile"><div class="h" style="font-size:15px;font-weight:700">⚡ Speed</div><div class="k" style="margin-top:8px">Ready candidate lists + AI + clear timelines, run by TA Ops.</div><div style="margin-top:7px;color:var(--teal-d);font-weight:700;font-size:11.5px">Goal: hire in 30 days</div></div>
+        <div class="tile"><div class="h" style="font-size:15px;font-weight:700">🎯 Quality</div><div class="k" style="margin-top:8px">Proper interview scorecards + an honest job preview.</div><div style="margin-top:7px;color:var(--teal-d);font-weight:700;font-size:11.5px">Goal: joinees stay past 90 days</div></div>
+        <div class="tile"><div class="h" style="font-size:15px;font-weight:700">⚙️ Low cost</div><div class="k" style="margin-top:8px">More referrals, fewer agencies, AI support.</div><div style="margin-top:7px;color:var(--teal-d);font-weight:700;font-size:11.5px">Goal: cost per hire ₹4,500</div></div>
+        <div class="tile"><div class="h" style="font-size:15px;font-weight:700">✨ Brand</div><div class="k" style="margin-top:8px">Regular social posts + the Apple brand value.</div><div style="margin-top:7px;color:var(--teal-d);font-weight:700;font-size:11.5px">Goal: more offers accepted</div></div>
       </div>
-      <div class="cols3" style="margin-top:16px">
-        <div class="card"><div class="h"><span class="num-i">1</span> The leaky bucket <span class="tag">LEAK</span></div><p>45% attrition, 55%+ frontline, 11-month tenure. ~55% of hiring just replaces churn instead of fuelling growth.</p></div>
-        <div class="card"><div class="h"><span class="num-i">2</span> Reactive &amp; slow <span class="tag">SLOW</span></div><p>50+ day TAT, weak forecasting, reactive pipelines. Stores open understaffed; panic hiring lowers quality.</p></div>
-        <div class="card"><div class="h"><span class="num-i">3</span> Expensive &amp; manual <span class="tag">COST</span></div><p>₹9,000/hire, 9–10% agency spend, partial ATS, no AI/analytics, only 20% referral hiring.</p></div>
-      </div>
-      <div class="insight">💡 <b>Core insight:</b> the three problems feed a vicious cycle — high attrition forces volume → volume overwhelms a slow process → slowness forces premium agency hiring → mismatched hires churn again. <b>Breaking the attrition link collapses the whole cycle.</b></div>
+      <div class="insight">Four focus areas, each with one owner and one clear number to track — so the plan stays simple and accountable.</div>
     </div>
   </section>
 
-  <!-- 02 BENCHMARKS -->
+  <!-- 02 30-60-90 -->
   <section class="slide">
-    <div class="shead"><div class="sec-name">Benchmarks · Global &amp; India</div><div class="sec-num"><b>02</b> / 12</div></div>
+    <div class="shead"><div class="sec-name">First 90 Days</div><div class="sec-num"><b>02</b> / 08</div></div>
     <div class="rule"></div>
-    <h2 class="title">Every target we're setting has already been hit</h2>
-    <p class="lead">Retail churns at ~2× the economy, so &lt;25% is best-in-class. Leaders prove the speed; an Indian Apple Premium Partner peer proves the model.</p>
-    <div class="body">
-      <div class="cards" style="grid-template-columns:repeat(3,1fr)">
-        <div class="card"><div class="h">🌯 Chipotle <span class="tag">AI · TAT</span></div><p>Time-to-hire <b>12 → 4 days</b> at ~10k hires/yr via conversational AI. Our hero proof-point.</p></div>
-        <div class="card"><div class="h">🏪 7-Eleven <span class="tag">TAT</span></div><p>Time-to-hire <b>~10 → &lt;5 days</b> via AI apply / screen / schedule 24/7.</p></div>
-        <div class="card"><div class="h">☕ Starbucks <span class="tag">RETAIN</span></div><p>Turnover cut <b>65% → 49%</b> via wages, benefits &amp; visible career paths.</p></div>
-      </div>
-      <div class="cols" style="margin-top:14px">
-        <div class="card peer"><div class="h">🦄 Unicorn Infosolutions — Apple Premium Partner <span class="tag">INDIA PEER</span></div><p><b>₹3,700 Cr+</b> turnover · ~100 stores + 39 service centres · 49 cities / 9 states · <b>1,500+</b> staff. Almost exactly Consolidated's profile — our best real-world benchmark.</p></div>
-        <div class="card"><div class="h">📱 The India hiring stack <span class="tag">TOOLS</span></div><p><b>Vahan.ai</b> WhatsApp AI recruiter (2–3 day fill) · <b>Apna</b> 22M-user network · <b>RASCI/NAPS</b> apprenticeships · <b>Lenskart Academy</b> training.</p></div>
-      </div>
-      <div class="insight">📉 Retail turnover ~<b>27% vs 13%</b> economy-wide; even <b>Reliance Retail cut ~38,000 net jobs in FY24</b> while hiring hard — churn is structural. <span class="src">Sources: Mercer, Starbucks ESG, Paradox, RIL FY24, FranchiseIndia, RASCI — all verified.</span></div>
-    </div>
-  </section>
-
-  <!-- 03 VISION -->
-  <section class="slide">
-    <div class="shead"><div class="sec-name">Vision</div><div class="sec-num"><b>03</b> / 12</div></div>
-    <div class="rule"></div>
-    <h2 class="title">From reactive hiring desk to talent engine</h2>
-    <p class="lead">The shift is from filling requisitions after they open to forecasting demand from the store-expansion plan and building talent ahead of need — a workforce-planning partner to Retail Ops, measured on quality and tenure, not just speed.</p>
-    <div class="body">
-      <div class="tiles t4">
-        <div class="tile"><div class="h" style="font-size:15px;font-weight:700">⚡ Speed</div><div class="k" style="margin-top:8px">Pipelines + AI + stage SLAs, owned by TA Ops.</div><div class="x" style="color:var(--teal-d);font-weight:700">Metric: ≤30-day TAT</div></div>
-        <div class="tile"><div class="h" style="font-size:15px;font-weight:700">🎯 Quality</div><div class="k" style="margin-top:8px">Culture-fit scorecards + realistic job previews.</div><div class="x" style="color:var(--teal-d);font-weight:700">Metric: 90-day stick rate</div></div>
-        <div class="tile"><div class="h" style="font-size:15px;font-weight:700">⚙️ Efficiency</div><div class="k" style="margin-top:8px">40%+ referrals, &lt;4% agency, AI automation.</div><div class="x" style="color:var(--teal-d);font-weight:700">Metric: cost/hire ₹4,500</div></div>
-        <div class="tile"><div class="h" style="font-size:15px;font-weight:700">✨ Brand</div><div class="k" style="margin-top:8px">Always-on content + Apple-ecosystem prestige.</div><div class="x" style="color:var(--teal-d);font-weight:700">Metric: offer-accept rate</div></div>
-      </div>
-      <div class="insight">Four pillars, each with a named owner and a hard metric — so "vision" translates directly into accountability on the KPI dashboard.</div>
-    </div>
-  </section>
-
-  <!-- 04 30-60-90 -->
-  <section class="slide">
-    <div class="shead"><div class="sec-name">Execution · First 90 Days</div><div class="sec-num"><b>04</b> / 12</div></div>
-    <div class="rule"></div>
-    <h2 class="title">A sequenced 30 · 60 · 90 day plan</h2>
-    <p class="lead">Deliberately ordered — you cannot scale a broken process. Stabilise and instrument first, build the engine second, prove results third. Early visible wins buy credibility for the deeper fixes.</p>
+    <h2 class="title">First 90 days — a step-by-step plan</h2>
+    <p class="lead">Done in order — we cannot speed up a broken process. First understand and fix the basics, then build the system, then show results. Quick early wins build trust for the bigger changes.</p>
     <div class="body">
       <div class="cols3">
-        <div class="panel"><h4>🟦 Days 0–30 · Diagnose &amp; Stabilize</h4><ul>
-          <li>Audit open reqs, TAT by stage, source-of-hire &amp; attrition by store/tenure.</li>
-          <li>Mandate full ATS adoption — one source of truth.</li>
-          <li>War-room for the 100 new-store buffer roles.</li>
-          <li>Relaunch referrals with instant payouts.</li>
+        <div class="panel"><h4>🟦 Days 0–30 · Understand &amp; Fix Basics</h4><ul>
+          <li>Check all open jobs, time taken at each step, where hires come from, and who is leaving (store-wise).</li>
+          <li>Make everyone use one hiring software (ATS).</li>
+          <li>Daily focus team for the 100 new-store jobs.</li>
+          <li>Restart the referral scheme with instant reward payout.</li>
         </ul></div>
-        <div class="panel"><h4>🟩 Days 31–60 · Build the Engine</h4><ul>
-          <li>Structured interview kits + culture-fit scorecards.</li>
-          <li>Always-on talent pools for high-volume roles.</li>
-          <li>Onboarding redesign: Day-1 readiness + 30/60/90 check-ins.</li>
-          <li>Deploy AI screening + chatbot; cut consultant contracts.</li>
+        <div class="panel"><h4>🟩 Days 31–60 · Build the System</h4><ul>
+          <li>Standard interview questions + culture-fit scorecards.</li>
+          <li>Keep ready, pre-checked candidate lists for high-volume jobs.</li>
+          <li>New-joinee plan: ready from Day 1 + check-ins at 30, 60, 90 days.</li>
+          <li>Start AI screening + chatbot; reduce agency contracts.</li>
         </ul></div>
-        <div class="panel"><h4>🟨 Days 61–90 · Scale &amp; Prove</h4><ul>
-          <li>Early wins: TAT ~40 days on volume roles; offer-drop &lt;20%.</li>
-          <li>Launch employer-brand content.</li>
-          <li>Go live with the real-time KPI dashboard.</li>
-          <li>Present the committed 12-month roadmap to leadership.</li>
+        <div class="panel"><h4>🟨 Days 61–90 · Show Results</h4><ul>
+          <li>Early wins: hiring time ~40 days; fewer candidates dropping offers.</li>
+          <li>Start employer-branding posts.</li>
+          <li>Launch a live hiring dashboard for leadership.</li>
+          <li>Present the full 12-month plan to leadership.</li>
         </ul></div>
       </div>
     </div>
   </section>
 
-  <!-- 05 ROADMAP -->
+  <!-- 03 ROADMAP -->
   <section class="slide">
-    <div class="shead"><div class="sec-name">12-Month Roadmap</div><div class="sec-num"><b>05</b> / 12</div></div>
+    <div class="shead"><div class="sec-name">12-Month Plan</div><div class="sec-num"><b>03</b> / 08</div></div>
     <div class="rule"></div>
-    <h2 class="title">Four quarters to a scalable engine</h2>
-    <p class="lead">Dependency-ordered, not parallel: foundation enables speed, speed frees focus for quality &amp; brand, quality enables optimisation. Each quarter has a gate before the next begins.</p>
+    <h2 class="title">The 12-month plan in four quarters</h2>
+    <p class="lead">Each quarter builds on the last. We finish one quarter's base work (the "gate") before starting the next.</p>
     <div class="body">
       <div class="timeline">
-        <div class="ph"><span class="tab">Q1</span><div class="th">Foundation</div><ul><li>Full ATS live</li><li>Structured hiring</li><li>Referral engine</li><li>Onboarding v2</li></ul><div class="gate">Gate: ATS adoption &gt;90%</div></div>
-        <div class="ph"><span class="tab">Q2</span><div class="th">Speed</div><ul><li>AI screening at scale</li><li>Pools for top 5 roles</li><li>SLA-locked funnel</li></ul><div class="gate">Gate: TAT ≤35 days</div></div>
-        <div class="ph"><span class="tab">Q3</span><div class="th">Quality &amp; Brand</div><ul><li>Employer-brand campaigns</li><li>Leadership playbook</li><li>Career ladders live</li></ul><div class="gate">Gate: attrition &lt;35%</div></div>
-        <div class="ph"><span class="tab">Q4</span><div class="th">Optimize</div><ul><li>Cost &amp; agency squeeze</li><li>Predictive pipelines</li></ul><div class="gate">Gate: TAT ≤30 · ₹4,500 · agency &lt;4%</div></div>
+        <div class="ph"><span class="tab">Q1</span><div class="th">Foundation</div><ul><li>Hiring software fully in use</li><li>Standard interviews</li><li>Referral scheme</li><li>New-joinee plan v2</li></ul><div class="gate">Gate: ATS used by &gt;90%</div></div>
+        <div class="ph"><span class="tab">Q2</span><div class="th">Speed</div><ul><li>AI screening at scale</li><li>Ready lists for top 5 jobs</li><li>Time limits at each step</li></ul><div class="gate">Gate: hiring time ≤35 days</div></div>
+        <div class="ph"><span class="tab">Q3</span><div class="th">Quality &amp; Brand</div><ul><li>Employer-branding push</li><li>Leadership hiring playbook</li><li>Career paths live</li></ul><div class="gate">Gate: people leaving &lt;35%</div></div>
+        <div class="ph"><span class="tab">Q4</span><div class="th">Optimise</div><ul><li>Reduce cost &amp; agencies</li><li>Plan hiring in advance</li></ul><div class="gate">Gate: 30 days · ₹4,500 · agency &lt;4%</div></div>
       </div>
     </div>
   </section>
 
-  <!-- 06 ORG -->
+  <!-- 04 ORG -->
   <section class="slide">
-    <div class="shead"><div class="sec-name">Organization &amp; Team</div><div class="sec-num"><b>06</b> / 12</div></div>
+    <div class="shead"><div class="sec-name">Team &amp; Structure</div><div class="sec-num"><b>04</b> / 08</div></div>
     <div class="rule"></div>
-    <h2 class="title">A team built for 1,000+ hires a year</h2>
-    <p class="lead">A Centre-of-Excellence + embedded model — central teams own tooling, analytics &amp; standards; embedded recruiters sit with the business and move fast. Structured by hiring type, ~13–15 people total.</p>
+    <h2 class="title">A team that can hire 1,000+ people a year</h2>
+    <p class="lead">A central expert team for tools, data &amp; standards, plus recruiters placed inside each business so they work closely and move fast. The team is split by hiring type — about 13–15 people in total.</p>
     <div class="body">
       <div class="org">
         <div class="head">Head – Talent Acquisition</div>
         <div class="stem"></div>
         <div class="row">
-          <div class="onode"><h5>Volume / Retail</h5><p>Frontline &amp; service hiring</p><span class="c">~820 / yr</span></div>
-          <div class="onode"><h5>Corporate &amp; Enterprise</h5><p>B2B · Edu · Corporate</p><span class="c">~160 / yr</span></div>
-          <div class="onode"><h5>Leadership &amp; Niche</h5><p>Exec search in-sourced</p><span class="c">predictable</span></div>
-          <div class="onode"><h5>TA Ops &amp; Analytics</h5><p>ATS · AI · dashboards</p><span class="c">backbone</span></div>
-          <div class="onode"><h5>Employer Brand</h5><p>Always-on sourcing</p><span class="c">pipeline</span></div>
+          <div class="onode"><h5>Volume / Retail</h5><p>Store &amp; service staff hiring</p><span class="c">~820 / yr</span></div>
+          <div class="onode"><h5>Corporate &amp; Enterprise</h5><p>B2B · Education · Corporate</p><span class="c">~160 / yr</span></div>
+          <div class="onode"><h5>Leadership &amp; Niche</h5><p>Senior hiring, done in-house</p><span class="c">steady</span></div>
+          <div class="onode"><h5>TA Ops &amp; Data</h5><p>Software · AI · dashboards</p><span class="c">support</span></div>
+          <div class="onode"><h5>Employer Brand</h5><p>Always-ready sourcing</p><span class="c">pipeline</span></div>
         </div>
       </div>
-      <div class="insight">📐 <b>Sizing:</b> volume recruiter ≈ 120–150 hires/yr · corporate ≈ 40–60 → ~6–7 recruiters, 3–4 sourcers, 1 ops/analytics, 1 brand owner + 4 leads. Capability shifts from req-processing to <b>sourcing, data fluency &amp; stakeholder management</b>; leadership search is in-sourced to cut agency cost.</div>
+      <div class="insight">📐 <b>Team size:</b> one volume recruiter handles ~120–150 hires/year, a corporate recruiter ~40–60. So we need ~6–7 recruiters, 3–4 sourcers, 1 data person, 1 branding person + 4 leads. Recruiters move from just filling forms to <b>sourcing, using data, and working closely with managers</b>.</div>
     </div>
   </section>
 
-  <!-- 07 TAT -->
-  <section class="slide">
-    <div class="shead"><div class="sec-name">Faster Hiring · TAT</div><div class="sec-num"><b>07</b> / 12</div></div>
+  <!-- 05 TAT -->
+  <section class="slide" data-anim>
+    <div class="shead"><div class="sec-name">Faster Hiring</div><div class="sec-num"><b>05</b> / 08</div></div>
     <div class="rule"></div>
-    <h2 class="title">Cutting time-to-hire from 50+ to ≤30 days</h2>
-    <p class="lead">TAT collapses when you stop starting from zero on every role. The funnel stalls in two predictable places — sourcing from scratch, and waiting on hiring-manager feedback. The fix is structural.</p>
+    <h2 class="title">Reduce hiring time from 50+ to 30 days or less</h2>
+    <p class="lead">Hiring is slow because we start from zero for every job, and we wait too long for manager feedback. The fix is to keep candidates ready and run the steps together with clear time limits.</p>
     <div class="body">
       <div class="cols">
         <div>
           <div class="bars">
             <div class="brow"><span class="nm">Today</span><div class="track"><div class="fill red" data-w="100">50+ days</div></div></div>
-            <div class="brow"><span class="nm">After pooling</span><div class="track"><div class="fill amber" data-w="72">~36 days</div></div></div>
-            <div class="brow"><span class="nm">Target</span><div class="track"><div class="fill teal" data-w="58">≤30 days</div></div></div>
-            <div class="brow"><span class="nm">Volume roles</span><div class="track"><div class="fill green" data-w="38">≤20 days</div></div></div>
+            <div class="brow"><span class="nm">With ready lists</span><div class="track"><div class="fill amber" data-w="72">~36 days</div></div></div>
+            <div class="brow"><span class="nm">Goal</span><div class="track"><div class="fill teal" data-w="58">30 days</div></div></div>
+            <div class="brow"><span class="nm">Store jobs</span><div class="track"><div class="fill green" data-w="38">20 days</div></div></div>
           </div>
-          <div class="insight" style="margin-top:20px">⭐ Benchmark: Chipotle runs <b>12 → 4 days</b> at ~10k hires/yr — our ≤30-day target is conservative.</div>
+          <div class="insight" style="margin-top:20px">⭐ Example: Chipotle hires in <b>4 days</b> while hiring 10,000/year — so our 30-day goal is easy to reach.</div>
         </div>
-        <div class="panel solve"><h4>🎯 The concrete TAT plan</h4><ul>
-          <li><b>Pipeline, not posting</b> — pre-screened pools for ~820 volume roles → days, not weeks.</li>
-          <li><b>Parallel funnel</b> — screen, assess &amp; schedule concurrently; AI screens 24/7.</li>
-          <li><b>SLA-locked stages</b> — HM feedback in 48h, interview-to-offer in 5 days, with escalation.</li>
-          <li><b>Instant scheduling</b> via chatbot for frontline; standing exec-search bench for leadership.</li>
-          <li><b>Cut offer-drop 28% → &lt;12%</b> with faster cycles, transparent comp &amp; warm engagement to Day 1.</li>
+        <div class="panel solve"><h4>🎯 How we make hiring faster</h4><ul>
+          <li><b>Keep ready candidate lists</b> for high-volume jobs (not fresh postings) → fill in days, not weeks.</li>
+          <li><b>Run steps together</b> — screening, interview &amp; booking at the same time; AI screens 24×7.</li>
+          <li><b>Fixed time limits</b> — manager feedback in 2 days, offer within 5 days.</li>
+          <li><b>Instant interview booking</b> by chatbot for store jobs; a ready panel for leadership roles.</li>
+          <li><b>Reduce offer drop-outs 28% → under 12%</b> with a faster process and clear salary upfront.</li>
         </ul></div>
       </div>
     </div>
   </section>
 
-  <!-- 08 ATTRITION -->
+  <!-- 06 ATTRITION -->
   <section class="slide" data-anim>
-    <div class="shead"><div class="sec-name">Attrition Framework</div><div class="sec-num"><b>08</b> / 12</div></div>
+    <div class="shead"><div class="sec-name">Stop People Leaving</div><div class="sec-num"><b>06</b> / 08</div></div>
     <div class="rule"></div>
-    <h2 class="title">45% → below 25% in 18–24 months</h2>
-    <p class="lead">Attrition is front-loaded — ~20% of new hires leave within 45 days, ~70% of leavers within 90 days. The framework attacks all three stages where tenure is won or lost. Retention begins at the point of hire.</p>
+    <h2 class="title">Reduce people leaving: 45% to below 25%</h2>
+    <p class="lead">Most people leave in the first 3 months — about 20% within 45 days, and about 70% of all leavers within 90 days. So we must fix hiring, joining and early support. Keeping people starts from the day we hire.</p>
     <div class="body">
       <div class="cols">
         <div>
           <div class="bars">
             <div class="brow"><span class="nm">Today</span><div class="track"><div class="fill red" data-w="100">45%</div></div></div>
-            <div class="brow"><span class="nm">12 months</span><div class="track"><div class="fill amber" data-w="78">~35%</div></div></div>
-            <div class="brow"><span class="nm">24 months</span><div class="track"><div class="fill green" data-w="55">&lt;25%</div></div></div>
+            <div class="brow"><span class="nm">In 12 months</span><div class="track"><div class="fill amber" data-w="78">~35%</div></div></div>
+            <div class="brow"><span class="nm">In 24 months</span><div class="track"><div class="fill green" data-w="55">below 25%</div></div></div>
           </div>
           <div class="tiles t3" style="margin-top:18px">
-            <div class="tile red"><div class="v" data-count="20" data-suf="%">0%</div><div class="k">leave by day 45</div></div>
-            <div class="tile red"><div class="v" data-count="70" data-suf="%">0%</div><div class="k">of leavers by day 90</div></div>
-            <div class="tile green"><div class="v" data-count="69" data-suf="%">0%</div><div class="k">stay 3+ yrs if onboarded well</div></div>
+            <div class="tile red"><div class="v" data-count="20" data-suf="%">0%</div><div class="k">leave within 45 days</div></div>
+            <div class="tile red"><div class="v" data-count="70" data-suf="%">0%</div><div class="k">of leavers go by 90 days</div></div>
+            <div class="tile green"><div class="v" data-count="69" data-suf="%">0%</div><div class="k">stay 3+ yrs if joined well</div></div>
           </div>
         </div>
-        <div class="panel solve"><h4>🎯 The three-stage framework</h4><ul>
-          <li><b>A · Hire right</b> — culture-fit &amp; realistic-job-preview screening + 40%+ referrals (referred hires stay longer).</li>
-          <li><b>B · Onboard right</b> — Day-1 readiness, buddy system, 30/60/90 check-ins, a named owner for the 90-day stick rate.</li>
-          <li><b>C · Retain right</b> — Advisor → Senior → Team Lead → Store Manager ladder + early-warning attrition analytics.</li>
-          <li><b>Sequence</b> — target the 55%+ frontline and 11-month tenure cliff first for fastest impact.</li>
+        <div class="panel solve"><h4>🎯 Our three-step plan</h4><ul>
+          <li><b>A · Hire right</b> — check culture fit, show an honest job preview, and use 40%+ referrals (referred people stay longer).</li>
+          <li><b>B · Settle them well</b> — ready from Day 1, give a buddy, and check in at 30/60/90 days. One owner for first-90-day retention.</li>
+          <li><b>C · Keep them</b> — a clear growth path (Advisor → Senior → Team Lead → Store Manager) + early alerts when someone may leave.</li>
+          <li><b>Start with</b> store staff (55%+) and the 11-month problem first.</li>
         </ul></div>
       </div>
     </div>
   </section>
 
-  <!-- 09 TECH & COST -->
+  <!-- 07 TECH & COST -->
   <section class="slide">
-    <div class="shead"><div class="sec-name">Technology, AI &amp; Cost</div><div class="sec-num"><b>09</b> / 12</div></div>
+    <div class="shead"><div class="sec-name">Technology &amp; Cost</div><div class="sec-num"><b>07</b> / 08</div></div>
     <div class="rule"></div>
-    <h2 class="title">AI drives the speed — and halves the cost</h2>
-    <p class="lead">AI absorbs the repetitive, high-volume work (sourcing, screening, scheduling, FAQs) that eats recruiter time and agency fees. Cost falls mainly as a by-product of more referrals, fewer agencies, and less rework from lower attrition.</p>
+    <h2 class="title">AI gives speed — and cuts the cost in half</h2>
+    <p class="lead">AI handles the repeated work — searching, screening, scheduling and answering candidate questions — which today takes recruiter time and agency money. Cost mainly drops because of more referrals, fewer agencies, and fewer re-hires.</p>
     <div class="body">
       <div class="cols">
-        <div class="panel"><h4>🤖 Recruitment tech stack — phased</h4><ul>
-          <li><b>Phase 1</b> — full ATS + live dashboards (the data spine).</li>
-          <li><b>Phase 2</b> — AI screening + conversational chatbot on volume funnels.</li>
-          <li><b>Phase 3</b> — AI sourcing + predictive attrition analytics.</li>
-          <li>Plus employer-brand programmatic ads &amp; social distribution.</li>
+        <div class="panel"><h4>🤖 Hiring tools — step by step</h4><ul>
+          <li><b>Step 1</b> — full hiring software (ATS) + live dashboards (the data base).</li>
+          <li><b>Step 2</b> — AI screening + a WhatsApp/chat assistant for high-volume jobs.</li>
+          <li><b>Step 3</b> — AI candidate search + early alerts on who may leave.</li>
+          <li>Plus job ads on social media.</li>
         </ul></div>
         <div class="panel solve"><h4>💰 Cost: ₹9,000 → ₹4,500</h4><ul>
-          <li><b>Referrals 20% → 40%+</b> — cheapest channel &amp; highest retention.</li>
-          <li><b>Agency 9–10% → &lt;4%</b> — in-source sourcing &amp; leadership search.</li>
-          <li><b>AI automation</b> — lower cost-per-touch at volume.</li>
-          <li><b>Lower attrition</b> — every avoided replacement saves a full hire + ramp-up.</li>
+          <li><b>Referrals 20% → 40%+</b> — cheapest channel, and people stay longer.</li>
+          <li><b>Agencies 9–10% → under 4%</b> — do sourcing &amp; leadership hiring in-house.</li>
+          <li><b>AI automation</b> — lower cost per candidate at high volume.</li>
+          <li><b>Less leaving</b> — every replacement avoided saves a full hiring cost + training time.</li>
         </ul></div>
       </div>
-      <div class="insight">🔁 <b>The flywheel:</b> referrals stay longer → attrition falls → fewer re-hires → recruiters focus on growth, not churn → agency budget reallocated to cheaper, stickier channels.</div>
+      <div class="insight">🔁 <b>The good cycle:</b> referrals stay longer → fewer people leave → fewer re-hires → recruiters focus on growth, not replacement → agency money moves to cheaper, better channels.</div>
     </div>
   </section>
 
-  <!-- 10 KPI & RISK -->
+  <!-- 08 KPI & RISK -->
   <section class="slide">
-    <div class="shead"><div class="sec-name">Metrics, Governance &amp; Risk</div><div class="sec-num"><b>10</b> / 12</div></div>
+    <div class="shead"><div class="sec-name">Measure &amp; Protect</div><div class="sec-num"><b>08</b> / 08</div></div>
     <div class="rule"></div>
-    <h2 class="title">How we track it — and de-risk it</h2>
+    <h2 class="title">How we measure progress — and reduce risk</h2>
     <div class="body" style="margin-top:18px">
       <div class="cols">
         <div>
           <table>
-            <thead><tr><th>KPI</th><th>Now</th><th></th><th>Target</th></tr></thead>
+            <thead><tr><th>What we track</th><th>Now</th><th></th><th>Goal</th></tr></thead>
             <tbody>
-              <tr><td>Average TAT</td><td><span class="cur">50+ d</span></td><td class="ar">→</td><td><span class="tgt">≤30 d</span></td></tr>
+              <tr><td>Hiring time</td><td><span class="cur">50+ d</span></td><td class="ar">→</td><td><span class="tgt">30 d</span></td></tr>
               <tr><td>Cost per hire</td><td><span class="cur">₹9,000</span></td><td class="ar">→</td><td><span class="tgt">₹4,500</span></td></tr>
               <tr><td>Referral hiring</td><td><span class="cur">20%</span></td><td class="ar">→</td><td><span class="tgt">40%+</span></td></tr>
-              <tr><td>Consultant spend</td><td><span class="cur">9–10%</span></td><td class="ar">→</td><td><span class="tgt">&lt;4%</span></td></tr>
-              <tr><td>Offer drop</td><td><span class="cur">28%</span></td><td class="ar">→</td><td><span class="tgt">&lt;12%</span></td></tr>
-              <tr><td>Attrition</td><td><span class="cur">45%</span></td><td class="ar">→</td><td><span class="tgt">&lt;25%</span></td></tr>
-              <tr><td>90-day stick rate</td><td><span class="cur">baseline</span></td><td class="ar">→</td><td><span class="tgt">90%+</span></td></tr>
+              <tr><td>Agency spend</td><td><span class="cur">9–10%</span></td><td class="ar">→</td><td><span class="tgt">&lt;4%</span></td></tr>
+              <tr><td>Offer drop-outs</td><td><span class="cur">28%</span></td><td class="ar">→</td><td><span class="tgt">&lt;12%</span></td></tr>
+              <tr><td>People leaving</td><td><span class="cur">45%</span></td><td class="ar">→</td><td><span class="tgt">&lt;25%</span></td></tr>
+              <tr><td>Stay past 90 days</td><td><span class="cur">baseline</span></td><td class="ar">→</td><td><span class="tgt">90%+</span></td></tr>
             </tbody>
           </table>
-          <div class="insight">Lead indicator: the <b>90-day stick rate</b> predicts attrition months before the annual number moves.</div>
+          <div class="insight">Most important early signal: <b>how many new joinees stay past 90 days</b> — it warns us months before yearly attrition rises.</div>
         </div>
-        <div class="panel risk"><h4>⚠ Risk → Mitigation</h4><ul>
-          <li><b>Competitors hiring hard</b> → employer brand + faster offers + referral pull.</li>
-          <li><b>Speed vs quality</b> → pipelines + structured assessment.</li>
-          <li><b>Attrition slow to fall</b> → front-load onboarding &amp; first-90-day fixes.</li>
-          <li><b>Tech adoption lag</b> → mandate ATS; tie to manager scorecards.</li>
-          <li><b>Demand spikes</b> → 100-hire buffer + always-on pools.</li>
+        <div class="panel risk"><h4>⚠ Risk → What we do</h4><ul>
+          <li><b>Competitors hiring fast</b> → strong brand + quicker offers + referrals.</li>
+          <li><b>Speed vs quality</b> → ready candidate lists + proper assessment.</li>
+          <li><b>Attrition not falling</b> → focus first on joining &amp; the first 90 days.</li>
+          <li><b>Slow software adoption</b> → make ATS compulsory; link to manager reviews.</li>
+          <li><b>Sudden demand</b> → 100-hire buffer + ready candidate lists.</li>
         </ul>
-        <div style="margin-top:14px;font-size:12.5px;color:var(--ink-2)"><b>Cadence:</b> weekly war-room (operational) · monthly business review with CEO/CHRO (strategic).</div>
+        <div style="margin-top:14px;font-size:12.5px;color:var(--ink-2)"><b>Review rhythm:</b> weekly team review (operations) · monthly review with CEO/CHRO (strategy).</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 11 OUTCOMES -->
+  <!-- CLOSE -->
   <section class="slide cover" data-anim>
     <div class="left">
       <div class="brandline"><span class="logo">Consolidated</span><span class="div"></span><span>Outcomes &amp; The Ask</span></div>
-      <h1>The same ~1,000 hires, powering <span class="u">real growth</span></h1>
-      <p class="sub">"We can't hire our way to ₹5,000 Cr while 45% walks out the back door. Fix retention and speed together — faster, cheaper, built to last."</p>
-      <div class="who">Head – Talent Acquisition, Consolidated Pvt Ltd &nbsp;·&nbsp; TA as a strategic business lever &nbsp;·&nbsp; 12–24 month horizon</div>
+      <h1>The same ~1,000 hires, now driving <span class="u">real growth</span></h1>
+      <p class="sub">"We cannot reach ₹5,000 Cr if 45% of people keep leaving. Fix retention and speed together — faster, cheaper, and people who stay."</p>
+      <div class="who">Head – Talent Acquisition, Consolidated Pvt Ltd &nbsp;·&nbsp; Hiring as a key business driver &nbsp;·&nbsp; 12–24 month plan</div>
     </div>
     <div class="right">
-      <div class="rk">Where we land in 18–24 months</div>
-      <div class="kfig"><div class="v">≤30 days</div><div class="k">Average time-to-hire</div></div>
-      <div class="kfig"><div class="v">&lt;25%</div><div class="k">Overall attrition</div></div>
-      <div class="kfig"><div class="v">₹4,500</div><div class="k">Cost per hire (–50%)</div></div>
-      <div class="kfig"><div class="v"><span class="ar">→</span> ₹5,000 Cr</div><div class="k">Revenue enabled</div></div>
+      <div class="rk">Where we reach in 18–24 months</div>
+      <div class="kfig"><div class="v">30 days</div><div class="k">Average hiring time</div></div>
+      <div class="kfig"><div class="v">below 25%</div><div class="k">People leaving</div></div>
+      <div class="kfig"><div class="v">₹4,500</div><div class="k">Cost per hire (half)</div></div>
+      <div class="kfig"><div class="v"><span class="ar">→</span> ₹5,000 Cr</div><div class="k">Growth supported</div></div>
     </div>
   </section>
 
 </div>
 
 <div class="hint" id="hint">Use <kbd>←</kbd> <kbd>→</kbd> arrows · <kbd>F</kbd> fullscreen · click dots to jump</div>
-
 <div class="foot"><span class="b">Consolidated Pvt Ltd · Talent Acquisition Strategy</span><span id="foot-no">Cover</span></div>
 
 <div class="nav">
@@ -475,14 +412,13 @@
   let cur=0;
   slides.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' active':'');d.onclick=()=>go(i);dotsBox.appendChild(d);});
   const dots=[...document.querySelectorAll('.dot')];
-
   function go(i){
     if(i<0||i>=slides.length)return;
     slides[cur].classList.remove('active');dots[cur].classList.remove('active');
     cur=i;
     slides[cur].classList.add('active');dots[cur].classList.add('active');
     progress.style.width=((cur+1)/slides.length*100)+'%';
-    footNo.textContent = cur===0 ? 'Cover' : (cur===slides.length-1 ? 'Close' : String(cur).padStart(2,'0')+' / 11');
+    footNo.textContent = cur===0 ? 'Cover' : (cur===slides.length-1 ? 'Close' : String(cur).padStart(2,"0")+" / 08");
     runAnim(slides[cur]);
     if(cur>0)hint.style.opacity='0';
   }
@@ -497,7 +433,6 @@
   let tx=0;
   addEventListener('touchstart',e=>tx=e.changedTouches[0].clientX,{passive:true});
   addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)dx<0?next():prev();},{passive:true});
-
   function runAnim(slide){
     slide.querySelectorAll('.v[data-count]').forEach(el=>{
       const target=+el.dataset.count,pre=el.dataset.pre||'',suf=el.dataset.suf||'';let start=null,dur=1000;
